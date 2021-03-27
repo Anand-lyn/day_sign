@@ -53,7 +53,7 @@ def saveHealth():
     url = "/health/save.json"
     headers["content-type"] = "application/x-www-form-urlencoded"
     data = {
-        "answers": '["0","0","2"]',
+        "answers": '["0"]',
         "latitude": addressData['latitude'],
         "longitude": addressData['longitude'],
         "country": addressData['country'],
