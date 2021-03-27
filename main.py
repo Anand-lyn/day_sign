@@ -31,54 +31,8 @@ logger.addHandler(logging.StreamHandler())
 
 
 def getAddr(addr):
-    keys = ['latitude', 'longitude', 'country', 'province', 'city', 'district', 'township', 'street', 'areacode']
+    keys = ['latitude', 'longitude', 'country', 'province', 'city', 'district']
     return dict(zip(keys, addr.split('|')))
-
-
-def signMessage(doSigning=True):
-    url = "/sign/getSignMessage.json"
-    data = {
-        "page": 1,
-        "size": 5
-    }
-    res = requests.post(host + url, headers=headers, data=data)
-    resData = res.json()
-    logger.info(f"获取签到信息成功")
-    if resData['code'] == 0:
-        if doSigning:
-            reqData = resData['data'][0]
-            return doSign(reqData)
-        return True
-    else:
-        logger.error(f"获取签到内容 -- 失败")
-    return False
-
-
-def doSign(reqData):
-    logger.info(f"{reqData['title']} -- 开始签到")
-    if reqData['type']:
-        logger.info(f"{reqData['title']} -- 已签到，跳过签到流程")
-        return True
-    url = "/sign/doSign.json"
-    data = {
-        "id": reqData['logId'],
-        "signId": reqData['id'],
-        "latitude": addressData['latitude'],
-        "longitude": addressData['longitude'],
-        "country": addressData['country'],
-        "province": addressData['province'],
-        "city": addressData['city'],
-        "district": addressData['district'],
-        "township": addressData['township']
-    }
-    res = requests.post(host + url, headers=headers, json=data).json()
-    if res['code'] == 0:
-        logger.info(f"{reqData['title']} -- 签到成功!!")
-        return True
-    else:
-        logger.error(f"{reqData['title']} -- 签到失败：{res}")
-        return False
-
 
 def healthy():
     url = "/health/getToday.json"
@@ -105,10 +59,7 @@ def saveHealth():
         "country": addressData['country'],
         "city": addressData['city'],
         "district": addressData['district'],
-        "province": addressData['province'],
-        "township": addressData['township'],
-        "street": addressData['street'],
-        "areacode": addressData['areacode']
+        "province": addressData['province']
     }
     res = requests.post(host + url, headers=headers, data=data).json()
     if res['code'] == 0:
@@ -141,12 +92,12 @@ def funcToStr(b, title=''):
 def main():
     infoOk, userInfo = getUserInfo()
     if infoOk:
-        title = f'我在校园 {funcToStr(signMessage,"签到")}{funcToStr(healthy,"打卡")}'
+        title = f'我在校园 {funcToStr(healthy,"打卡")}'
         with open('./current.txt', 'r') as f:
             result = f"```\n姓名: {userInfo['name']}\n{f.read()}\n```"
     else:
         title = '我在校园打卡信息已过期!'
-        result = f'签到失败,信息过期或错误\n{userInfo}'
+        result = f'打卡失败,信息过期或错误\n{userInfo}'
     #     发送提醒
     notify(result, title)
 
