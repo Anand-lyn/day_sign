@@ -13,9 +13,9 @@ host = "https://student.wozaixiaoyuan.com"
 headers = {
     "Host": "student.wozaixiaoyuan.com",
     "Connection": "keep-alive",
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 "
-                  "Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat",
-    "Referer": "https://servicewechat.com/wxce6d08f781975d91/147/page-frame.html",
+    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)"
+                  "Mobile/15E148 MicroMessenger/8.0.2(0x18000239) NetType/WIFI Language/zh_CN",
+    "Referer": "https://servicewechat.com/wxce6d08f781975d91/167/page-frame.html",
     "Cookie": f"SESSION={SESSION}; path=/; HttpOnly",
     "token": f"{TOKEN}"
 }
