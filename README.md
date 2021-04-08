@@ -7,8 +7,8 @@
 ```
 TOKEN           #抓取的token
 SESSION         #抓取的session的值
-ADDRESS         #例如 '28.682976|115.857972|中国|江西省|南昌市|红谷滩区|沙井街道|世贸路|360113'
-                对应关系 'latitude', 'longitude', 'country', 'province', 'city', 'district', 'township', 'street', 'areacode'
+ADDRESS         #例如 '28.682976|115.857972|中国|江西省|南昌市|红谷滩区'
+                对应关系 'latitude', 'longitude', 'country', 'province', 'city', 'district'
 PUBLISH_KEY     #方糖的密钥
 ```
 
